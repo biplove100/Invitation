@@ -54,6 +54,21 @@
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
     }
 
+    #unmute-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1002;
+}
+
+
     /* Close Button */
     #close-btn {
       position: absolute;
@@ -103,12 +118,13 @@
 
   <!-- Popup Container -->
   <div id="popup-container">
-    <div id="close-btn">&times;</div>
-    <video id="popup-video" src="video.mp4" autoplay playsinline></video>
-  </div>
+  <div id="close-btn">&times;</div>
+  <video id="popup-video" src="video.mp4" autoplay muted playsinline></video>
+  <button id="unmute-btn">🔊 Unmute</button>
+</div>
 
   <!-- Map Button -->
-  <a id="map-button" href="https://maps.app.goo.gl/g8Q1p4HvTnTrabnj7?g_st=aw" target="_blank">View Location on Google Maps</a>
+  <a id="map-button" href="https://maps.app.goo.gl/3NxuTLvZvbszDTNm6" target="_blank">View Location on Google Maps</a>
 
   <script>
     const mainVideo = document.getElementById('main-video');
@@ -123,6 +139,12 @@
       popupVideo.currentTime = 0;
       popupVideo.play();
     });
+
+    document.getElementById('unmute-btn').addEventListener('click', () => {
+  popupVideo.muted = false;
+  popupVideo.play(); // resume if paused
+});
+
 
     // Close popup and show map button
     closeBtn.addEventListener('click', () => {
